@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "dgSpecHash": "vFHBxBvwY0EvtUudDaf6xII2rzmfWUXla6vsy9tnbkeejfrn5kqOLP47ydXTcIAGkLqjfj3b+aqJynu9VzmsEA==",
+  "success": true,
+  "projectFilePath": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric\\10.1.2175\\microsoft.servicefabric.10.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.data\\7.1.2175\\microsoft.servicefabric.data.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.data.extensions\\7.1.2175\\microsoft.servicefabric.data.extensions.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.data.interfaces\\7.1.2175\\microsoft.servicefabric.data.interfaces.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.diagnostics.internal\\7.1.2175\\microsoft.servicefabric.diagnostics.internal.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.fabrictransport.internal\\7.1.2175\\microsoft.servicefabric.fabrictransport.internal.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.services\\7.1.2175\\microsoft.servicefabric.services.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.services.remoting\\7.1.2175\\microsoft.servicefabric.services.remoting.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512"
+  ],
+  "logs": []
+}

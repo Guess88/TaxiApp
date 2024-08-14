@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "dgSpecHash": "0T4L504O4X7bcpZuZ/enz8JCGuSJObKH5FHbey/fCESZ65eGv0B7OLal9mWJxEvmU3wpfIXF7dfGe/DLRFzObg==",
+  "success": true,
+  "projectFilePath": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\WebAPI\\WebAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric\\10.1.2175\\microsoft.servicefabric.10.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.aspnetcore.abstractions\\7.1.2175\\microsoft.servicefabric.aspnetcore.abstractions.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.aspnetcore.kestrel\\7.1.2175\\microsoft.servicefabric.aspnetcore.kestrel.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.data\\7.1.2175\\microsoft.servicefabric.data.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.data.extensions\\7.1.2175\\microsoft.servicefabric.data.extensions.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.data.interfaces\\7.1.2175\\microsoft.servicefabric.data.interfaces.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.diagnostics.internal\\7.1.2175\\microsoft.servicefabric.diagnostics.internal.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.fabrictransport.internal\\7.1.2175\\microsoft.servicefabric.fabrictransport.internal.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.services\\7.1.2175\\microsoft.servicefabric.services.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.servicefabric.services.remoting\\7.1.2175\\microsoft.servicefabric.services.remoting.7.1.2175.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\6.0.16\\microsoft.aspnetcore.app.runtime.win-x64.6.0.16.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.16\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.16.nupkg.sha512",
+    "C:\\Users\\milan\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\6.0.16\\microsoft.netcore.app.runtime.win-x64.6.0.16.nupkg.sha512"
+  ],
+  "logs": []
+}
