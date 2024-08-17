@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Common.DB;
+using Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Common.DB;
-using Common.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
-using NuGet.Protocol;
 
 namespace WebAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -94,7 +88,7 @@ namespace WebAPI.Controllers
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
@@ -116,17 +110,27 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<UserWithToken>> Login([FromBody] User user)
+        public async Task<ActionResult<UserWithToken>> Login([FromBody] LoginUserDTO loginUser)
         {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(loginUser.PasswordHash));
+                loginUser.PasswordHash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
 
-            user = await _context.Users
-                     .Where(u => u.Email == user.Email
-                             && u.PasswordHash == user.PasswordHash)
+            var user = await _context.Users
+                     .Where(u => u.Email == loginUser.Email
+                             && u.PasswordHash == loginUser.PasswordHash)
                      .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             UserWithToken userWithToken = new UserWithToken(user);
 
-            if(userWithToken == null)
+            if (userWithToken == null)
             {
                 return NotFound();
             }
@@ -147,9 +151,100 @@ namespace WebAPI.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             userWithToken.AccessToken = tokenHandler.WriteToken(token);
-            
+
 
             return userWithToken;
         }
+
+        
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromForm] UserRegistrationDto model)
+        {
+            if (await _context.Users.AnyAsync(u => u.Email == model.Email))
+            {
+                return BadRequest("User with this email already exists.");
+            }
+
+            // Hashiranje lozinke pomoću SHA256
+            using (var sha256 = SHA256.Create())
+            {
+                var passwordBytes = Encoding.UTF8.GetBytes(model.Password);
+                var hashedPassword = sha256.ComputeHash(passwordBytes);
+                model.Password = Convert.ToBase64String(hashedPassword);
+            }
+
+            var user = new User
+            {
+                Username = model.Username,
+                Email = model.Email,
+                PasswordHash = model.Password,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                DateOfBirth = model.DateOfBirth,
+                Address = model.Address
+            };
+
+            var commonProjectPath = Path.Combine("..", "Common", "Photos");
+
+            if (model.ProfilePicture != null && model.ProfilePicture.Length > 0)
+            {
+                // Korisnik je uploadovao sliku
+                var filePath = Path.Combine(commonProjectPath, model.ProfilePicture.FileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.ProfilePicture.CopyToAsync(stream);
+                }
+
+                // Relativna putanja za bazu u odnosu na Common projekat
+                user.ProfilePicturePath = Path.Combine("Common", "Photos", model.ProfilePicture.FileName);
+            }
+            else
+            {
+                // Korisnik nije uploadovao sliku, dodeli putanju do podrazumevane slike u Common projektu
+                user.ProfilePicturePath = Path.Combine("Common", "Photos", "defaultUserPhoto.jpg");
+            }
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return Ok("Registration successful");
+        }
     }
+
+    /*[Route("SaveFile")]
+    [HttpPost]
+    public IActionResult SaveFile()
+    {
+        try
+        {
+            var httpRequest = HttpContext.Request;
+
+            if (httpRequest.Form.Files.Count > 0)
+            {
+                var file = httpRequest.Form.Files[0];
+
+                // Dobijanje putanje do Photos direktorijuma
+                var filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "Common", "Photos", file.FileName);
+
+                // Čuvanje fajla
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+                return Ok(new { message = "File uploaded successfully", fileName = file.FileName });
+            }
+            else
+            {
+                return BadRequest(new { message = "No file uploaded" });
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = "An error occurred while saving the file.", error = ex.Message });
+        }
+    }*/
+
 }
+

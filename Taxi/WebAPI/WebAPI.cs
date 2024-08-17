@@ -2,6 +2,7 @@ using Common.DB;
 using Common.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
@@ -73,6 +74,16 @@ namespace WebAPI
                         builder.Services.AddEndpointsApiExplorer();
                         builder.Services.AddSwaggerGen();
 
+                        builder.Services.AddCors(options =>
+                        {
+                            options.AddPolicy(name: "cors", builder => {
+                                builder.WithOrigins("http://localhost:3000")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod()
+                                        .AllowCredentials();
+
+                                });
+                            });
 
 
                         var app = builder.Build();
@@ -81,10 +92,18 @@ namespace WebAPI
                         app.UseSwagger();
                         app.UseSwaggerUI();
                         }
+                        app.UseCors("cors");
 
                         app.UseAuthentication();
                         app.UseAuthorization();
                         app.MapControllers();
+
+                        //app.UseStaticFiles(new StaticFileOptions
+                        //{
+                        //    FileProvider = new PhysicalFileProvider(
+                        //         Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "Common", "Photos")),
+                        //    RequestPath = "/Photos"
+                        //});
 
                         return app;
 

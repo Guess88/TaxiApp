@@ -251,3 +251,5 @@ D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\UserService\bin\Debug\net8.0\win-x64
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\UserService\bin\Debug\net8.0\win-x64\System.Security.Permissions.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\UserService\bin\Debug\net8.0\win-x64\System.Windows.Extensions.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\UserService\bin\Debug\net8.0\win-x64\Microsoft.Data.SqlClient.SNI.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\UserService\bin\Debug\net8.0\win-x64\Microsoft.AspNetCore.Http.Features.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\UserService\bin\Debug\net8.0\win-x64\System.IO.Pipelines.dll
