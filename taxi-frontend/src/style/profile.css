@@ -1,0 +1,84 @@
+/* Glavni stil za pozadinu i boju teksta */
+.custom-style {
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.customView-div {
+    background-color: #1f3a5b;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-right: 25px;
+    border: 1px solid #2c4f7a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+.customProfile-div {
+    font-size: 16px;
+    font-weight: 600;
+    color: #a9c5e8;
+    margin-bottom: 5px;
+    flex: 1;
+}
+
+.customProfile-hr {
+    border: none;
+    border-top: 1px solid #2c4f7a;
+    margin: 0 ;
+    margin-right: 25px;
+}
+
+.customProfile-container {
+    display: flex;
+    justify-content: space-between; /* Razmak između elemenata */
+    gap: 20px; /* Razmak između div-ova */
+  }
+
+.edit-button {
+    background-color: #1f78b4;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+}
+
+.edit-button:hover {
+    background-color: #155a88;
+}
+
+.custom-input {
+    background-color: #2c4f7a;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #2c4f7a;
+    border-radius: 5px;
+    width: 93%;  /* Ograniči širinu input polja na 80% roditeljskog elementa */
+    max-width: 500px;  /* Maksimalna širina input polja */
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-bottom: 5px;  /* Prostor između input polja */
+}
+
+
+.custom-input:focus {
+    outline: none;
+    border-color: #1f78b4;
+    box-shadow: 0 0 5px rgba(31, 120, 180, 0.5);
+}
+
+
+/* Smanjenje visine sekcije */
+.form-container {
+    max-height: 85vh;  /* Ograniči maksimalnu visinu forme */
+    overflow-y: auto;  /* Omogući skrolovanje unutar forme ako je potrebno */
+    padding: 20px;  /* Prostor unutar sekcije */
+}

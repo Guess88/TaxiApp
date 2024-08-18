@@ -1,9 +1,11 @@
 ﻿using Common.DB;
+using Common.Interfaces;
 using Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -46,36 +48,6 @@ namespace WebAPI.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
-        {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
 
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -223,6 +195,89 @@ namespace WebAPI.Controllers
             }
             return Ok(user);
         }
+
+
+
+        [HttpPut("UpdateUser")]
+        public async Task<IActionResult> UpdateUser([FromForm] updateUserDTO updatedUser)
+        {
+          
+
+            // Pronađi korisnika iz baze koristeći Id
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == updatedUser.Email);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Ažuriraj samo podatke koji su prosleđeni
+            if (!string.IsNullOrEmpty(updatedUser.Password))
+            {
+                // Hashuj novu lozinku pre čuvanja
+                using (var sha256 = SHA256.Create())
+                {
+                    var passwordBytes = Encoding.UTF8.GetBytes(updatedUser.Password);
+                    var hashedPassword = sha256.ComputeHash(passwordBytes);
+                    user.PasswordHash = BitConverter.ToString(hashedPassword).Replace("-", "").ToLower();
+                }
+            }
+            else
+            {
+                // Zadrži staru lozinku
+                _context.Entry(user).Property(u => u.PasswordHash).IsModified = false;
+            }
+
+            // Ažuriraj druge podatke
+            user.Username = updatedUser.Username;
+            user.Email = updatedUser.Email;
+            user.FirstName = updatedUser.FirstName;
+            user.LastName = updatedUser.LastName;
+            user.DateOfBirth = updatedUser.DateOfBirth;
+            user.Address = updatedUser.Address;
+
+            var commonProjectPath = Path.Combine("..", "Common", "Photos");
+
+            if (updatedUser.ProfilePicture != null && updatedUser.ProfilePicture.Length > 0)
+            {
+                // Korisnik je uploadovao sliku
+                var filePath = Path.Combine(commonProjectPath, updatedUser.ProfilePicture.FileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await updatedUser.ProfilePicture.CopyToAsync(stream);
+                }
+
+                // Relativna putanja za bazu u odnosu na Common projekat
+                user.ProfilePicturePath = Path.Combine("Common", "Photos", updatedUser.ProfilePicture.FileName);
+            }
+            else
+            {
+                // Zadrži putanju za staru sliku
+                _context.Entry(user).Property(u => u.ProfilePicturePath).IsModified = false;
+            }
+
+            _context.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(user.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+
 
     }
 

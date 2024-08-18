@@ -57,7 +57,7 @@ const Registration = () => {
         flexDirection: 'column',
         alignItems: 'center',
         padding: 2,
-        maxWidth: 600, // Povećano da bi se omogućio prostor za dva `TextField`-a u redu
+        maxWidth: 600, 
         margin: 'auto',
         backgroundColor: '#f7f7f7',
         borderRadius: 2,
