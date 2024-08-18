@@ -187,6 +187,7 @@ D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\m
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\msquic.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\Azure.Core.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\Azure.Identity.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\Microsoft.AspNetCore.Http.Features.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\Microsoft.Data.SqlClient.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\Microsoft.EntityFrameworkCore.dll
@@ -231,6 +232,7 @@ D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\M
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\System.Configuration.ConfigurationManager.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\System.Drawing.Common.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\System.IdentityModel.Tokens.Jwt.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\System.IO.Pipelines.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\System.Memory.Data.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\System.Runtime.Caching.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\UserServicePkg\Code\System.Security.Cryptography.ProtectedData.dll

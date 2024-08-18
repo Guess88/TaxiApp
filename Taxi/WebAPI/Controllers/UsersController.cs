@@ -170,7 +170,7 @@ namespace WebAPI.Controllers
             {
                 var passwordBytes = Encoding.UTF8.GetBytes(model.Password);
                 var hashedPassword = sha256.ComputeHash(passwordBytes);
-                model.Password = Convert.ToBase64String(hashedPassword);
+                model.Password = BitConverter.ToString(hashedPassword).Replace("-", "").ToLower();
             }
 
             var user = new User
@@ -181,7 +181,8 @@ namespace WebAPI.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 DateOfBirth = model.DateOfBirth,
-                Address = model.Address
+                Address = model.Address,
+                UserType = model.UserType            
             };
 
             var commonProjectPath = Path.Combine("..", "Common", "Photos");
@@ -210,41 +211,20 @@ namespace WebAPI.Controllers
 
             return Ok("Registration successful");
         }
+
+        
+        [HttpGet("get-user-by-email")]
+        public async Task<IActionResult> GetUserByEmail(string email)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+            return Ok(user);
+        }
+
     }
-
-    /*[Route("SaveFile")]
-    [HttpPost]
-    public IActionResult SaveFile()
-    {
-        try
-        {
-            var httpRequest = HttpContext.Request;
-
-            if (httpRequest.Form.Files.Count > 0)
-            {
-                var file = httpRequest.Form.Files[0];
-
-                // Dobijanje putanje do Photos direktorijuma
-                var filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "Common", "Photos", file.FileName);
-
-                // Čuvanje fajla
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
-
-                return Ok(new { message = "File uploaded successfully", fileName = file.FileName });
-            }
-            else
-            {
-                return BadRequest(new { message = "No file uploaded" });
-            }
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "An error occurred while saving the file.", error = ex.Message });
-        }
-    }*/
 
 }
 

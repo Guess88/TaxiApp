@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Typography, Box, Input, Grid, IconButton, Link} from '@mui/material';
+import { TextField, Button, Typography, Box, Input, Grid, IconButton, Link, FormControl, InputLabel,Select, MenuItem} from '@mui/material';
 import UploadIcon from '@mui/icons-material/Upload';
 import axios from 'axios';
 import {useNavigate } from 'react-router-dom';
@@ -8,22 +8,31 @@ const Registration = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [address, setAddress] = useState('');
+  const [userType, setUserType] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
   const navigate = useNavigate();
 
   const handleRegister = async () => {
+
+    if (password !== confirmPassword) { // Provera da li se lozinke poklapaju
+      alert('Passwords do not match');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('Username', username);
     formData.append('Email', email);
-    formData.append('PasswordHash', password);
+    formData.append('Password', password);
     formData.append('FirstName', firstName);
     formData.append('LastName', lastName);
     formData.append('DateOfBirth', dateOfBirth);
     formData.append('Address', address);
+    formData.append('UserType', userType);
     if (profilePicture) {
       formData.append('ProfilePicture', profilePicture);
     }
@@ -34,10 +43,11 @@ const Registration = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      navigate('/login'); // Preusmeri na login nakon registracije
+      navigate('/'); // Preusmeri na login nakon registracije
     } catch (error) {
-      console.error('Registration failed:', error);
+      console.error('Registration failed:', error.response ? error.response.data : error.message);
     }
+    
   };
 
   return (
@@ -77,17 +87,34 @@ const Registration = () => {
           onChange={(e) => setEmail(e.target.value)}
           sx={{ marginBottom: 2 }}
         />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          sx={{ marginBottom: 2 }}
-        />
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              sx={{ marginBottom: 2 }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Confirm Password"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              sx={{ marginBottom: 2 }}
+            />
+          </Grid>
+        </Grid>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -136,16 +163,36 @@ const Registration = () => {
           onChange={(e) => setAddress(e.target.value)}
           sx={{ marginBottom: 2 }}
         />
-        <IconButton component="label">
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+          <FormControl fullWidth required sx={{ marginBottom: 2 }}>
+            <InputLabel id="user-type-label">User Type</InputLabel>
+              <Select
+                labelId="user-type-label"
+                id="user-type"
+                value={userType}
+                label="User Type"
+                onChange={(e) => setUserType(e.target.value)}
+              >
+                <MenuItem value={1}>User</MenuItem>
+                <MenuItem value={2}>Driver</MenuItem>
+            </Select>
+        </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+          <IconButton component="label">
             <UploadIcon />
-          <Input
-            
-            type="file"
-            accept="image/*"
-            hidden
-            onChange={(e) => setProfilePicture(e.target.files[0])}
-          />
-        </IconButton>
+              <Input
+                
+                type="file"
+                accept="image/*"
+                hidden
+                onChange={(e) => setProfilePicture(e.target.files[0])}
+              />
+           </IconButton>
+          </Grid>
+        </Grid>
+      
         <Button
           type="button"
           fullWidth
