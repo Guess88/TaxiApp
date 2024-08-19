@@ -28,5 +28,8 @@ namespace Common.Models
         public string Address { get; set; }
         public UserType UserType { get; set; }
         public string ProfilePicturePath { get; set; }
+
+        public bool IsVerificated { get; set; } = false;
+        public bool IsBlocked { get; set; } = false;
     }
 }

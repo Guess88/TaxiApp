@@ -38,7 +38,7 @@ const Registration = () => {
     }
 
     try {
-      await axios.post('http://localhost:9062/api/Users/Register', formData, {
+      await axios.post(process.env.REACT_APP_REGISTER, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

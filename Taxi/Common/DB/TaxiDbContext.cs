@@ -16,6 +16,7 @@ namespace Common.DB
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Ride>Rides { get; set; }
     }
     public class TaxiDbContextFactory : IDesignTimeDbContextFactory<TaxiDbContext>
     {

@@ -107,7 +107,7 @@ const DashboardDriver = ({ user }) => {
             }
       
           try {
-                await axios.put('http://localhost:9062/api/Users/UpdateUser', formData, {
+                await axios.put(process.env.REACT_APP_UPDATE_USER, formData, {
                 headers: {
                 'Content-Type': 'multipart/form-data',
               },
@@ -149,7 +149,7 @@ const DashboardDriver = ({ user }) => {
         <div>
         <div id="nav-bar">
             <input id="nav-toggle" type="checkbox"/>
-            <div id="nav-header"><a id="nav-title" href="https://codepen.io" target="_blank"rel="noreferrer noopener"><FontAwesomeIcon icon={faTaxi} className="fas" />Taxi</a>
+            <div id="nav-header"><a id="nav-title" href="/" target="_blank"rel="noreferrer noopener"><FontAwesomeIcon icon={faTaxi} className="fas" />Taxi</a>
                 <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
                 <hr/>
             </div>

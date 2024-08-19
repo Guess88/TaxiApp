@@ -12,7 +12,7 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:9062/api/Users/Login', { email, PasswordHash: password });
+      const response = await axios.post(process.env.REACT_APP_LOGIN, { email, PasswordHash: password });
       const { accessToken } = response.data;
       localStorage.setItem('token', accessToken);
 

@@ -154,7 +154,9 @@ namespace WebAPI.Controllers
                 LastName = model.LastName,
                 DateOfBirth = model.DateOfBirth,
                 Address = model.Address,
-                UserType = model.UserType            
+                UserType = model.UserType,
+                IsVerificated = false, 
+                IsBlocked = false 
             };
 
             var commonProjectPath = Path.Combine("..", "Common", "Photos");

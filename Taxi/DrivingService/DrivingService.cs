@@ -4,7 +4,10 @@ using System.Fabric;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.DB;
 using Common.Interfaces;
+using Common.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Remoting.Runtime;
@@ -15,11 +18,36 @@ namespace DrivingService
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class DrivingService : StatefulService, IDrive
+    public sealed class DrivingService : StatefulService, IDrive
     {
+        private readonly TaxiDbContext _context;
         public DrivingService(StatefulServiceContext context)
             : base(context)
-        { }
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<TaxiDbContext>();
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-53QCKGT\\SQLEXPRESS;Initial Catalog=taxi;Integrated Security=True;TrustServerCertificate=True;");
+
+            _context = new TaxiDbContext(optionsBuilder.Options);
+        }
+
+        public async Task<Ride> CreateRide(int userId, string startAddress, string endAddress, decimal estimatedCost, TimeSpan estimatedWaitTime)
+        {
+            var ride = new Ride
+            {
+                UserId = userId,
+                StartAddress = startAddress,
+                EndAddress = endAddress,
+                EstimatedCost = estimatedCost,
+                EstimatedWaitTime = estimatedWaitTime,
+                Status = DrivingStatus.Created,
+                CreatedAt = DateTime.Now
+            };
+
+            _context.Rides.Add(ride);
+            await _context.SaveChangesAsync();
+
+            return ride;
+        }
 
         /// <summary>
         /// Optional override to create listeners (e.g., HTTP, Service Remoting, WCF, etc.) for this service replica to handle client or user requests.

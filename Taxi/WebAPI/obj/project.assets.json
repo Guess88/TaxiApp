@@ -3149,6 +3149,21 @@
         "runtime": {
           "bin/placeholder/Common.dll": {}
         }
+      },
+      "DrivingService/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Common": "1.0.0",
+          "Microsoft.ServiceFabric.Services": "7.1.2175",
+          "Microsoft.ServiceFabric.Services.Remoting": "7.1.2175"
+        },
+        "compile": {
+          "bin/placeholder/DrivingService.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DrivingService.dll": {}
+        }
       }
     },
     "net8.0/win-x64": {
@@ -6032,6 +6047,21 @@
         },
         "runtime": {
           "bin/placeholder/Common.dll": {}
+        }
+      },
+      "DrivingService/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Common": "1.0.0",
+          "Microsoft.ServiceFabric.Services": "7.1.2175",
+          "Microsoft.ServiceFabric.Services.Remoting": "7.1.2175"
+        },
+        "compile": {
+          "bin/placeholder/DrivingService.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DrivingService.dll": {}
         }
       }
     }
@@ -11782,11 +11812,17 @@
       "type": "project",
       "path": "../Common/Common.csproj",
       "msbuildProject": "../Common/Common.csproj"
+    },
+    "DrivingService/1.0.0": {
+      "type": "project",
+      "path": "../DrivingService/DrivingService.csproj",
+      "msbuildProject": "../DrivingService/DrivingService.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Common >= 1.0.0",
+      "DrivingService >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.8",
       "Microsoft.EntityFrameworkCore >= 8.0.8",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.8",
@@ -11829,6 +11865,9 @@
           "projectReferences": {
             "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Common.csproj": {
               "projectPath": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Common.csproj"
+            },
+            "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\DrivingService\\DrivingService.csproj": {
+              "projectPath": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\DrivingService\\DrivingService.csproj"
             }
           }
         }

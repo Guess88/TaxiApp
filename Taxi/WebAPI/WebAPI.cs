@@ -74,6 +74,8 @@ namespace WebAPI
                         builder.Services.AddEndpointsApiExplorer();
                         builder.Services.AddSwaggerGen();
 
+
+
                         builder.Services.AddCors(options =>
                         {
                             options.AddPolicy(name: "cors", builder => {
@@ -97,13 +99,7 @@ namespace WebAPI
                         app.UseAuthentication();
                         app.UseAuthorization();
                         app.MapControllers();
-
-                        //app.UseStaticFiles(new StaticFileOptions
-                        //{
-                        //    FileProvider = new PhysicalFileProvider(
-                        //         Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "Common", "Photos")),
-                        //    RequestPath = "/Photos"
-                        //});
+;
 
                         return app;
 

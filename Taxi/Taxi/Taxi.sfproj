@@ -37,7 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DrivingService\DrivingService.csproj" />
-    <ProjectReference Include="..\UserService\UserService.csproj" />
+    <ProjectReference Include="..\Estimation\Estimation.csproj" />
     <ProjectReference Include="..\WebAPI\WebAPI.csproj">
       <ServiceLaunchUrl>http://localhost:{ServicePort}/swagger</ServiceLaunchUrl>
     </ProjectReference>

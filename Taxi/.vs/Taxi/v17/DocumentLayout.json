@@ -3,32 +3,20 @@
   "WorkspaceRootPath": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{532CEF71-392D-4729-A33A-4555574C31AC}|WebAPI\\WebAPI.csproj|d:\\faks\\cetvrta goina\\web\\taxi\\taxiapp\\taxi\\webapi\\controllers\\ridescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{532CEF71-392D-4729-A33A-4555574C31AC}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\ridescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CE95394-4B2D-442C-B20F-3EC216AA3BE2}|Common\\Common.csproj|d:\\faks\\cetvrta goina\\web\\taxi\\taxiapp\\taxi\\common\\models\\estimationvalues.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CE95394-4B2D-442C-B20F-3EC216AA3BE2}|Common\\Common.csproj|solutionrelative:common\\models\\estimationvalues.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{532CEF71-392D-4729-A33A-4555574C31AC}|WebAPI\\WebAPI.csproj|d:\\faks\\cetvrta goina\\web\\taxi\\taxiapp\\taxi\\webapi\\webapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{532CEF71-392D-4729-A33A-4555574C31AC}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\webapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{532CEF71-392D-4729-A33A-4555574C31AC}|WebAPI\\WebAPI.csproj|d:\\faks\\cetvrta goina\\web\\taxi\\taxiapp\\taxi\\webapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{532CEF71-392D-4729-A33A-4555574C31AC}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2CE95394-4B2D-442C-B20F-3EC216AA3BE2}|Common\\Common.csproj|d:\\faks\\cetvrta goina\\web\\taxi\\taxiapp\\taxi\\common\\models\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CE95394-4B2D-442C-B20F-3EC216AA3BE2}|Common\\Common.csproj|solutionrelative:common\\models\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2CE95394-4B2D-442C-B20F-3EC216AA3BE2}|Common\\Common.csproj|d:\\faks\\cetvrta goina\\web\\taxi\\taxiapp\\taxi\\common\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CE95394-4B2D-442C-B20F-3EC216AA3BE2}|Common\\Common.csproj|solutionrelative:common\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2CE95394-4B2D-442C-B20F-3EC216AA3BE2}|Common\\Common.csproj|d:\\faks\\cetvrta goina\\web\\taxi\\taxiapp\\taxi\\common\\models\\userregistrationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CE95394-4B2D-442C-B20F-3EC216AA3BE2}|Common\\Common.csproj|solutionrelative:common\\models\\userregistrationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2CE95394-4B2D-442C-B20F-3EC216AA3BE2}|Common\\Common.csproj|d:\\faks\\cetvrta goina\\web\\taxi\\taxiapp\\taxi\\common\\models\\loginuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CE95394-4B2D-442C-B20F-3EC216AA3BE2}|Common\\Common.csproj|solutionrelative:common\\models\\loginuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{532CEF71-392D-4729-A33A-4555574C31AC}|WebAPI\\WebAPI.csproj|d:\\faks\\cetvrta goina\\web\\taxi\\taxiapp\\taxi\\webapi\\controllers\\imagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{532CEF71-392D-4729-A33A-4555574C31AC}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\imagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{532CEF71-392D-4729-A33A-4555574C31AC}|WebAPI\\WebAPI.csproj|d:\\faks\\cetvrta goina\\web\\taxi\\taxiapp\\taxi\\webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{532CEF71-392D-4729-A33A-4555574C31AC}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -55,91 +43,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "updateUserDTO.cs",
-              "DocumentMoniker": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Models\\updateUserDTO.cs",
-              "RelativeDocumentMoniker": "Common\\Models\\updateUserDTO.cs",
-              "ToolTip": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Models\\updateUserDTO.cs",
-              "RelativeToolTip": "Common\\Models\\updateUserDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAZAAAAAAAAAA==",
+              "Title": "EstimationValues.cs",
+              "DocumentMoniker": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Models\\EstimationValues.cs",
+              "RelativeDocumentMoniker": "Common\\Models\\EstimationValues.cs",
+              "ToolTip": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Models\\EstimationValues.cs",
+              "RelativeToolTip": "Common\\Models\\EstimationValues.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-18T16:30:46.025Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserRegistrationDto.cs",
-              "DocumentMoniker": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Models\\UserRegistrationDto.cs",
-              "RelativeDocumentMoniker": "Common\\Models\\UserRegistrationDto.cs",
-              "ToolTip": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Models\\UserRegistrationDto.cs",
-              "RelativeToolTip": "Common\\Models\\UserRegistrationDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-18T16:30:37.923Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ImagesController.cs",
-              "DocumentMoniker": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\WebAPI\\Controllers\\ImagesController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\ImagesController.cs",
-              "ToolTip": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\WebAPI\\Controllers\\ImagesController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\ImagesController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-18T02:34:47.802Z",
+              "WhenOpened": "2024-08-19T16:54:35.076Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Common\\Models\\User.cs",
-              "ToolTip": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Models\\User.cs",
-              "RelativeToolTip": "Common\\Models\\User.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
+              "Title": "WebAPI.cs",
+              "DocumentMoniker": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\WebAPI\\WebAPI.cs",
+              "RelativeDocumentMoniker": "WebAPI\\WebAPI.cs",
+              "ToolTip": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\WebAPI\\WebAPI.cs",
+              "RelativeToolTip": "WebAPI\\WebAPI.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAowEoAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T18:38:24.509Z",
+              "WhenOpened": "2024-08-19T15:41:49.11Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LoginUserDTO.cs",
-              "DocumentMoniker": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Models\\LoginUserDTO.cs",
-              "RelativeDocumentMoniker": "Common\\Models\\LoginUserDTO.cs",
-              "ToolTip": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\Common\\Models\\LoginUserDTO.cs",
-              "RelativeToolTip": "Common\\Models\\LoginUserDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T18:22:29.87Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\WebAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "WebAPI\\appsettings.json",
-              "ToolTip": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\WebAPI\\appsettings.json",
-              "RelativeToolTip": "WebAPI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-08-17T18:08:45.8Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "RidesController.cs",
+              "DocumentMoniker": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\WebAPI\\Controllers\\RidesController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\RidesController.cs",
+              "ToolTip": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\WebAPI\\Controllers\\RidesController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\RidesController.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAIwDMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T13:08:12.318Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "UsersController.cs",
               "DocumentMoniker": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\WebAPI\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\UsersController.cs",
               "ToolTip": "D:\\Faks\\Cetvrta goina\\WEB\\Taxi\\TaxiApp\\Taxi\\WebAPI\\Controllers\\UsersController.cs",
               "RelativeToolTip": "WebAPI\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAMcAAAAAAAAAAAAAABYBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T10:56:41.585Z",
+              "WhenOpened": "2024-08-18T22:41:19.481Z",
               "EditorCaption": ""
             }
           ]

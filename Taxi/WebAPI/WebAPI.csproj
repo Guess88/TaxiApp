@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\DrivingService\DrivingService.csproj" />
   </ItemGroup>
 
 </Project>
