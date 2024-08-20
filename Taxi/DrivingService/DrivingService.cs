@@ -12,6 +12,7 @@ using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
+using Microsoft.AspNetCore.SignalR;
 
 namespace DrivingService
 {
@@ -22,6 +23,7 @@ namespace DrivingService
     {
         private readonly TaxiDbContext _context;
         private IReliableDictionary<int, Ride> _pendingRides;
+
         public DrivingService(StatefulServiceContext context)
             : base(context)
         {
@@ -66,7 +68,7 @@ namespace DrivingService
 
             ride.Status = DrivingStatus.WaitingForAccept;
 
-            ride.EstimatedTravelTime = TimeSpan.FromMinutes(new Random().Next(10, 60)); 
+            ride.EstimatedTravelTime = TimeSpan.FromMinutes(new Random().Next(1,1)); 
 
             await _context.SaveChangesAsync();
 
@@ -120,7 +122,7 @@ namespace DrivingService
 
                     await _context.SaveChangesAsync();
 
-                    //await NotifyUser(ride.UserId, ride.EstimatedTravelTime);
+                    
 
                     await _pendingRides.TryRemoveAsync(tx, rideId);
 
@@ -155,13 +157,25 @@ namespace DrivingService
 
             var ride = await _context.Rides.FindAsync(rideId);
             ride.Status = DrivingStatus.Completed;
+            ride.CompletedAt = DateTime.Now;
 
 
             _context.Users.Update(driver);
             _context.Users.Update(user);
             _context.Rides.Update(ride);
 
+            //await _hubContext.Clients.User(user.Id.ToString())
+            //    .SendAsync("ReceiveCountdown", rideId, ride.EstimatedTravelTime);
+
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Ride>> GetPreviousRides(int userId)
+        {
+            return await _context.Rides
+                .Where(r => r.UserId == userId)
+                .OrderByDescending(r => r.CreatedAt) 
+                .ToListAsync();
         }
 
         public async Task<decimal> GetDriverAverageRating(int driverId)

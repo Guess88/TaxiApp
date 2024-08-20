@@ -103,3 +103,8 @@
     border-color: #1f78b4;
     box-shadow: 0 0 5px rgba(31, 120, 180, 0.5);
 }
+
+.ride-info {
+    display: flex;
+    gap: 30px; /* Razmak između elemenata */
+}

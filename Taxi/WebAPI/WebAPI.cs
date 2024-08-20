@@ -65,6 +65,7 @@ namespace WebAPI
                             };
                         });
 
+                        builder.Services.AddSignalR();
    
 
                         builder.WebHost
@@ -101,7 +102,7 @@ namespace WebAPI
                         app.UseAuthentication();
                         app.UseAuthorization();
                         app.MapControllers();
-;
+                        app.MapHub<TimerHub>("/timer-hub");
 
                         return app;
 

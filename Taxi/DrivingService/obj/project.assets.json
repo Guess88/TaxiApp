@@ -1587,7 +1587,6 @@
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Microsoft.AspNetCore.SignalR.Client": "8.0.8",
-          "Microsoft.AspNetCore.SignalR.Common": "8.0.8",
           "Microsoft.AspNetCore.SignalR.Core": "1.1.0",
           "Microsoft.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8",
@@ -3005,7 +3004,6 @@
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Microsoft.AspNetCore.SignalR.Client": "8.0.8",
-          "Microsoft.AspNetCore.SignalR.Common": "8.0.8",
           "Microsoft.AspNetCore.SignalR.Core": "1.1.0",
           "Microsoft.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8",
@@ -6043,7 +6041,6 @@
     "net8.0": [
       "Common >= 1.0.0",
       "Microsoft.AspNetCore.SignalR.Client >= 8.0.8",
-      "Microsoft.AspNetCore.SignalR.Common >= 8.0.8",
       "Microsoft.ServiceFabric.Services >= 7.1.2175",
       "Microsoft.ServiceFabric.Services.Remoting >= 7.1.2175"
     ]
@@ -6100,10 +6097,6 @@
         "targetAlias": "net8.0",
         "dependencies": {
           "Microsoft.AspNetCore.SignalR.Client": {
-            "target": "Package",
-            "version": "[8.0.8, )"
-          },
-          "Microsoft.AspNetCore.SignalR.Common": {
             "target": "Package",
             "version": "[8.0.8, )"
           },

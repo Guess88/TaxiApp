@@ -187,7 +187,16 @@ D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\ms
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\msquic.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Azure.Core.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Azure.Identity.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.AspNetCore.Authorization.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.AspNetCore.Connections.Abstractions.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.AspNetCore.Http.Connections.Client.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.AspNetCore.Http.Connections.Common.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.AspNetCore.Http.Features.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.AspNetCore.SignalR.Client.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.AspNetCore.SignalR.Client.Core.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.AspNetCore.SignalR.Common.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.AspNetCore.SignalR.Core.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.Data.SqlClient.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.EntityFrameworkCore.dll
@@ -199,6 +208,7 @@ D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Mi
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.Extensions.Configuration.Abstractions.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.Extensions.DependencyInjection.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.Extensions.Features.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.Extensions.Logging.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\Taxi\pkg\Debug\EstimationPkg\Code\Microsoft.Extensions.Options.dll

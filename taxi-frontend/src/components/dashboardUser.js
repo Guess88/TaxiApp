@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faListAlt ,faPlus ,faTaxi  } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Rating from '@mui/material/Rating';
+import TimerComponent from './timerComponent';
 
 
 const DashboardUser = ({ user }) => {
@@ -18,6 +19,7 @@ const DashboardUser = ({ user }) => {
     const [address, setAddress] = useState('');
     const [userId,setId] = useState('');
     const [isCreatedRide,setIsCreatedRide] = useState('');
+    
 
     
 
@@ -32,9 +34,12 @@ const DashboardUser = ({ user }) => {
     const [endAddress, setEndAddress] = useState('');
     const [estimatedCost, setEstimatedCost] = useState(null);
     const [estimatedWaitTime, setEstimatedWaitTime] = useState(null);
+    const [estimatedTravelTime,setEstimatedTravelTime] = useState(null);
     const [rideId, setRideId] = useState('');
     const [rideStatus, setRideStatus] = useState(0);
     const [valueRating, setValueRating] = useState(1);
+    const [rides, setRides] = useState([]);
+
    
 
     useEffect(() => {
@@ -50,6 +55,25 @@ const DashboardUser = ({ user }) => {
             setProfilePicturePath(user.profilePicturePath)
         }
     }, [user]);
+
+    useEffect(() => {
+        const fetchRides = async () => {
+            try {
+                const response = await axios.get(process.env.REACT_APP_PREVIOUS_RIDES, {
+                    params: { userId: userId }
+                });
+                console.log(userId);
+                setRides(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error("Error fetching rides:", error);
+            }
+        };
+    
+        fetchRides();
+    }, [userId]);
+
+   
 
     if (!user) {
         return <div>No user data available</div>;
@@ -171,6 +195,7 @@ const DashboardUser = ({ user }) => {
             const response = await axios.post(process.env.REACT_APP_CREATE_RIDE, {userId, startAddress, endAddress, });
             setEstimatedCost(response.data.estimatedCost);
             setEstimatedWaitTime(response.data.estimatedWaitTime);
+            
             setRideId(response.data.id);
             setIsCreatedRide(true);
         } catch (error) {
@@ -186,6 +211,7 @@ const DashboardUser = ({ user }) => {
                 'Content-Type': 'application/json',
                 },
             });
+            setEstimatedTravelTime(response.data.estimatedTravelTime);
             setRideStatus(response.data.status);
         } catch (error) {
             console.error('Error confirming ride:', error);
@@ -216,6 +242,10 @@ const DashboardUser = ({ user }) => {
         }
     };
 
+     const handleRideStatusChange = (newStatus) => {
+        setRideStatus(newStatus);
+    };
+
 
     return (
         <div>
@@ -233,9 +263,9 @@ const DashboardUser = ({ user }) => {
                 <hr/>
             </div>
             <div id="nav-content">
-                <div class="nav-button" onClick={handleEditProfile} ><FontAwesomeIcon icon={faUser} className="fas" /><span>Profile</span></div>
-                <div class="nav-button" onClick={handleNewRide}><FontAwesomeIcon icon={faPlus } className="fas" /><span>New ride</span></div>
-                <div class="nav-button" onClick={handlePreviousRide}><FontAwesomeIcon icon={faListAlt } className='fas' /><span>Previous Rides</span></div>
+                <div className="nav-button" onClick={handleEditProfile} ><FontAwesomeIcon icon={faUser} className="fas" /><span>Profile</span></div>
+                <div className="nav-button" onClick={handleNewRide}><FontAwesomeIcon icon={faPlus } className="fas" /><span>New ride</span></div>
+                <div className="nav-button" onClick={handlePreviousRide}><FontAwesomeIcon icon={faListAlt } className='fas' /><span>Previous Rides</span></div>
             </div>
             <input id="nav-footer-toggle" type="checkbox"/>
             <div id="nav-footer">
@@ -248,7 +278,7 @@ const DashboardUser = ({ user }) => {
                             user.userType === 2 ? 'Driver' : 'Unknown'}
                         </span>
                     </div>
-                    <label for="nav-footer-toggle"><i class="fas fa-caret-up"></i></label>
+                    <label for="nav-footer-toggle"><i className="fas fa-caret-up"></i></label>
                 </div>
                 <div id="nav-footer-content">
                     <h1 className='fas'>{user.firstName} {user.lastName}</h1>
@@ -407,10 +437,16 @@ const DashboardUser = ({ user }) => {
                                 </div>
                             </div>                      
                         ) : rideStatus === 1 ? (
-                            <div style={{ width: '20%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                            <div style={{ width: '30%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
                                 <div className='customProfile-div'>
-                                    <h2 style={{ marginLeft: '10%' }}>{startAddress}-{endAddress}</h2>
-                                    <h3>Wait until one of our employees accepts the ride</h3>     
+                                    {/*<h2 style={{ marginLeft: '10%' }}>{startAddress}-{endAddress}</h2>
+                                    <h3>Wait until one of our employees accepts the ride</h3>    
+                                    {timeRemaining !== null ? (
+                                        <div>Vreme do dolaska: {timeRemaining} sekundi</div> 
+                                    ) : (
+                                        <div>Čekanje na prihvatanje vožnje...</div>
+                                    )}*/}
+                                   <TimerComponent rideId={rideId} estimatedWaitTime={estimatedWaitTime} estimatedTravelTime={estimatedTravelTime} onRideStatusChange={handleRideStatusChange}/>
                                 </div>
                             </div>
                         ) : rideStatus === 3 ? (
@@ -430,7 +466,19 @@ const DashboardUser = ({ user }) => {
 
 
             ): viewOption === "previousRide" ? (
-                <></>
+                <div className='customProfile-div' style={{ width: '30%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                    {rides.map(ride => (
+                        <div key={ride.id}>
+                            <div className='ride-info'>
+                                <h3>Ride from {ride.startAddress} to {ride.endAddress}</h3>
+                                <h3>Date: {convertDateTimeToDateOnly(ride.createdAt)}</h3>
+                                <h3>Price: {ride.estimatedCost}$</h3>
+                            </div>
+                            <hr/>
+                        </div>
+                        
+                    ))}
+                </div>
             ) : null}
             </div>
         </div>

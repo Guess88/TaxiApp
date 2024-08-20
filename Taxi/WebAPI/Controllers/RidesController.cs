@@ -101,6 +101,27 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet("previousRides")]
+        public async Task<IActionResult> GetPreviousRides(int userId)
+        {
+            try
+            {
+                var proxy = ServiceProxy.Create<IDrive>(new Uri("fabric:/Taxi/DrivingService"), new ServicePartitionKey(0));
+                var rides = await proxy.GetPreviousRides(userId);
+
+                if (rides == null || rides.Count == 0)
+                {
+                    return NotFound("No previous rides found.");
+                }
+
+                return Ok(rides);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         [HttpGet("driver/{driverId}/rating")]
         public async Task<IActionResult> GetDriverRating(int driverId)
         {

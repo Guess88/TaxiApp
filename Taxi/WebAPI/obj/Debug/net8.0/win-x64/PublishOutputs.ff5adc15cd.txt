@@ -334,7 +334,10 @@ D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubT
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Azure.Identity.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Humanizer.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Microsoft.AspNetCore.Http.Connections.Client.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Microsoft.AspNetCore.Razor.Language.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Microsoft.AspNetCore.SignalR.Client.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Microsoft.AspNetCore.SignalR.Client.Core.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Microsoft.Build.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Microsoft.Build.Framework.dll

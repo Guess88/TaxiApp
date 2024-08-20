@@ -2,6 +2,8 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Models;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.ServiceFabric.Services.Runtime;
 
 namespace DrivingService

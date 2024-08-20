@@ -16,6 +16,7 @@ namespace Common.Interfaces
         Task AddRideToPendingList(Ride ride);
         Task AcceptRide(int driverId, int rideId);
         Task RateDriver(int driverId, int rating,int rideId,int userId);
+        Task<List<Ride>> GetPreviousRides(int userId);
         Task<decimal> GetDriverAverageRating(int driverId);
         Task BlockDriver(int driverId);
         Task UnblockDriver(int driverId);

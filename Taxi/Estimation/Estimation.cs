@@ -26,7 +26,7 @@ namespace Estimation
             decimal cost = new Random().Next(5, 50);
 
             // Logika za ra?unanje vremena ?ekanja (random primer)
-            TimeSpan waitTime = TimeSpan.FromMinutes(new Random().Next(1, 15));
+            TimeSpan waitTime = TimeSpan.FromMinutes(new Random().Next(1, 1));
 
             // Vra?a Estimation objekat sa oba podatka
             return await Task.FromResult(new EstimationValues(cost, waitTime));
