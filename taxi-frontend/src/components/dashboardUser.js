@@ -3,6 +3,7 @@ import '../style/dashboardNav.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faListAlt ,faPlus ,faTaxi  } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import Rating from '@mui/material/Rating';
 
 
 const DashboardUser = ({ user }) => {
@@ -15,12 +16,25 @@ const DashboardUser = ({ user }) => {
     const [lastName, setLastName] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [address, setAddress] = useState('');
+    const [userId,setId] = useState('');
+    const [isCreatedRide,setIsCreatedRide] = useState('');
+
     
 
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [repeatNewPassword, setRepeatNewPassword] = useState('');
     const [profilePicture, setProfilePicture] = useState(null);
+    const [profilePicturePath, setProfilePicturePath] = useState('');
+
+
+    const [startAddress, setStartAddress] = useState('');
+    const [endAddress, setEndAddress] = useState('');
+    const [estimatedCost, setEstimatedCost] = useState(null);
+    const [estimatedWaitTime, setEstimatedWaitTime] = useState(null);
+    const [rideId, setRideId] = useState('');
+    const [rideStatus, setRideStatus] = useState(0);
+    const [valueRating, setValueRating] = useState(1);
    
 
     useEffect(() => {
@@ -31,6 +45,9 @@ const DashboardUser = ({ user }) => {
             setLastName(user.lastName);
             setDateOfBirth(convertDateTimeToDateOnly(user.dateOfBirth));
             setAddress(user.address);
+            setId(user.id);
+            setIsCreatedRide(user.isRideCreated);
+            setProfilePicturePath(user.profilePicturePath)
         }
     }, [user]);
 
@@ -103,7 +120,7 @@ const DashboardUser = ({ user }) => {
                 const basePath = 'Common\\Photos\\';
                 const profilePictureFileName = profilePicture.name 
                 const filePath = `${basePath}${profilePictureFileName}`;
-                user.profilePicturePath = filePath;
+                setProfilePicturePath(filePath);
             }
       
           try {
@@ -145,9 +162,71 @@ const DashboardUser = ({ user }) => {
             console.error("Error allRides", error);
         }
     };
+
+
+    //ZA voznje
+    const handleCreateRide = async () => {
+        try {
+            // Call your API to create a new ride
+            const response = await axios.post(process.env.REACT_APP_CREATE_RIDE, {userId, startAddress, endAddress, });
+            setEstimatedCost(response.data.estimatedCost);
+            setEstimatedWaitTime(response.data.estimatedWaitTime);
+            setRideId(response.data.id);
+            setIsCreatedRide(true);
+        } catch (error) {
+            console.error('Error creating ride:', error);
+        }
+    };
+
+    const handleConfirmRide = async () => {
+        try {
+            // Call your API to confirm the ride
+            const response = await axios.post(process.env.REACT_APP_CONFIRM_RIDE, rideId,{
+                headers: {
+                'Content-Type': 'application/json',
+                },
+            });
+            setRideStatus(response.data.status);
+        } catch (error) {
+            console.error('Error confirming ride:', error);
+        }
+    }
+
+    const handleRatingChange = async (event, newValue) => {
+        setValueRating(newValue);
+        try {
+            const data = {
+                driverId: 2, // Replace 2 with the actual driverId
+                rating: newValue,
+                rideId: rideId,
+                userId: userId
+            };
+            await axios.post(process.env.REACT_APP_RATE_DRIVER, data,{ //OVO 2 imeni sa driverId
+                headers: {
+                    'Content-Type': 'application/json',
+                    },
+            });   
+            setIsCreatedRide(false);
+            setRideStatus(0);
+   
+            alert('Thank you!');
+        } catch (error) {
+            console.error('Error submitting rating:', error);
+            alert('Failed to submit rating');
+        }
+    };
+
+
     return (
         <div>
-        <div id="nav-bar">
+        {rideStatus === 2 ? (
+                            <div style={{ width: '20%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                                {/* Content for status 1 */}
+                                <p>Status is 1</p>
+                            </div>
+        ):(
+            <div>
+                <div id="nav-bar">
             <input id="nav-toggle" type="checkbox"/>
             <div id="nav-header"><a id="nav-title" href="/" target="_blank"rel="noreferrer noopener"><FontAwesomeIcon icon={faTaxi} className="fas" />Taxi</a>
                 <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
@@ -161,7 +240,7 @@ const DashboardUser = ({ user }) => {
             <input id="nav-footer-toggle" type="checkbox"/>
             <div id="nav-footer">
                 <div id="nav-footer-heading">
-                    <div id="nav-footer-avatar"><img src={`http://localhost:9062/api/Images/${user.profilePicturePath}`} alt="avatar"/></div>
+                    <div id="nav-footer-avatar"><img src={`http://localhost:9062/api/Images/${profilePicturePath}`} alt="avatar"/></div>
                     <div id="nav-footer-titlebox"><a id="nav-footer-title" href="https://codepen.io/uahnbu/pens/public" target="_blank" rel="noreferrer noopener">{user.username}</a>
                         <span id="nav-footer-subtitle">
                            {user.userType === 0 ? 'Administrator' : 
@@ -185,7 +264,7 @@ const DashboardUser = ({ user }) => {
                  <div>
                      <div className="custom-style">Edit profile</div>
                      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                         <img src={`http://localhost:9062/api/Images/${user.profilePicturePath}`} alt="User" style={{ width: '100px', height: '100px', marginBottom: '20px', borderRadius: '50%'  }} />
+                         <img src={`http://localhost:9062/api/Images/${profilePicturePath}`} alt="User" style={{ width: '100px', height: '100px', marginBottom: '20px', borderRadius: '50%'  }} />
                      </div>
                      {isEditing ? (
                          <div className='customView-div' style={{ marginLeft: '30px'}}>
@@ -287,13 +366,77 @@ const DashboardUser = ({ user }) => {
 
 
 
+
             ) : viewOption === "newRide" ? (
-                <></>
+                <div>
+                    {!isCreatedRide ? (
+                        <div  style={{ width: '40%', backgroundColor: '#18283b',position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',padding: '20px',boxSizing: 'border-box',borderRadius: '10px'}}>
+                            <div className='customProfile-div'>
+                                <h2 style={{marginLeft:'250px'}}>Create new ride</h2>
+                                <input 
+                                    className='custom-input-create-ride' 
+                                    type="text" 
+                                    placeholder="Start Address" 
+                                    value={startAddress} 
+                                    onChange={(e) => setStartAddress(e.target.value)} 
+                                />
+                                <br/>
+                                <br/>
+                                
+                                <input 
+                                    className='custom-input-create-ride'
+                                    type="text" 
+                                    placeholder="End Address" 
+                                    value={endAddress} 
+                                    onChange={(e) => setEndAddress(e.target.value)} 
+                                />
+
+                                <br/>
+                                <br/>
+                                <button className='edit-button'style={{marginLeft:'85%'}} onClick={handleCreateRide}>Order</button>
+                            </div>
+                        </div>
+                    ) : (
+                        rideStatus === 0 ? (
+                            <div style={{ width: '20%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                                <div className='customProfile-div'>
+                                    <h2 style={{ marginLeft: '15%' }}>{startAddress}-{endAddress}</h2>
+                                    <h2>Price: {estimatedCost}$</h2>
+                                    <h2>Waiting time: {estimatedWaitTime.split(':')[1]} minutes</h2>
+                                    <button className='edit-button' style={{ marginLeft: '75%' }} onClick={handleConfirmRide}>Confirm</button>
+                                </div>
+                            </div>                      
+                        ) : rideStatus === 1 ? (
+                            <div style={{ width: '20%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                                <div className='customProfile-div'>
+                                    <h2 style={{ marginLeft: '10%' }}>{startAddress}-{endAddress}</h2>
+                                    <h3>Wait until one of our employees accepts the ride</h3>     
+                                </div>
+                            </div>
+                        ) : rideStatus === 3 ? (
+                            <div style={{ width: '20%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                                <div className='customProfile-div'>
+                                    <h3>Rate your driver</h3>
+                                    <Rating
+                                        value={valueRating}
+                                        onChange={handleRatingChange}
+                                    />
+                                </div>
+                            </div>
+                        ) : null
+                       
+                    )}
+                </div>
+
+
             ): viewOption === "previousRide" ? (
                 <></>
             ) : null}
             </div>
         </div>
+            </div>
+        )}
+      
      </div>
     );
 };

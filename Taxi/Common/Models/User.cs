@@ -31,5 +31,10 @@ namespace Common.Models
 
         public bool IsVerificated { get; set; } = false;
         public bool IsBlocked { get; set; } = false;
+
+        public bool IsRideCreated { get; set; } = false;
+        public bool IsRideAccepted { get; set; } = false;
+        public int RatingCount { get; set; }
+        public int RatingTotal { get; set; }
     }
 }

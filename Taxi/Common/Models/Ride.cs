@@ -48,10 +48,15 @@ namespace Common.Models
 
         // Vreme kada je vožnja završena
         public DateTime? CompletedAt { get; set; }
+
+
+        public TimeSpan? EstimatedTravelTime { get; set; }
+
     }
     public enum DrivingStatus
     {
         Created,
+        WaitingForAccept,
         InProgress,
         Completed,
         Cancelled

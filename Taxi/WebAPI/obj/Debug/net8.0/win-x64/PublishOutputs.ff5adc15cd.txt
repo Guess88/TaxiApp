@@ -1,4 +1,7 @@
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\DrivingService.exe
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\WebAPI.exe
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\DrivingService.deps.json
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\DrivingService.runtimeconfig.json
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\appsettings.Development.json
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\appsettings.json
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\WebAPI.dll
@@ -560,5 +563,7 @@ D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubT
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Microsoft.Data.SqlClient.SNI.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Common.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\DrivingService.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\Common.pdb
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\DrivingService.pdb
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\PubTmp\Out\WebAPI.deps.json

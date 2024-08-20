@@ -46,6 +46,9 @@ namespace Common.Migrations
                     b.Property<decimal>("EstimatedCost")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<TimeSpan?>("EstimatedTravelTime")
+                        .HasColumnType("time");
+
                     b.Property<TimeSpan>("EstimatedWaitTime")
                         .HasColumnType("time");
 
@@ -67,7 +70,7 @@ namespace Common.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ride");
+                    b.ToTable("Ride", (string)null);
                 });
 
             modelBuilder.Entity("Common.Models.User", b =>
@@ -96,6 +99,12 @@ namespace Common.Migrations
                     b.Property<bool>("IsBlocked")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRideAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRideCreated")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsVerificated")
                         .HasColumnType("bit");
 
@@ -111,6 +120,12 @@ namespace Common.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RatingCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RatingTotal")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserType")
                         .HasColumnType("int");
 
@@ -120,7 +135,7 @@ namespace Common.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 #pragma warning restore 612, 618
         }

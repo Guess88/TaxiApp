@@ -4737,8 +4737,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Common >= 1.0.0",
-      "Microsoft.ServiceFabric.Services >= 7.1.2175",
-      "Microsoft.ServiceFabric.Services.Remoting >= 7.1.2175"
+      "Microsoft.ServiceFabric.Services >= 7.1.2175"
     ]
   },
   "packageFolders": {
@@ -4793,10 +4792,6 @@
         "targetAlias": "net8.0",
         "dependencies": {
           "Microsoft.ServiceFabric.Services": {
-            "target": "Package",
-            "version": "[7.1.2175, )"
-          },
-          "Microsoft.ServiceFabric.Services.Remoting": {
             "target": "Package",
             "version": "[7.1.2175, )"
           }

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{2CE95394-4B2D-442C-B20F-3EC216AA3BE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estimation", "Estimation\Estimation.csproj", "{CB690F4E-F80D-4B09-9A96-D39D7229558F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation", "Estimation\Estimation.csproj", "{CB690F4E-F80D-4B09-9A96-D39D7229558F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

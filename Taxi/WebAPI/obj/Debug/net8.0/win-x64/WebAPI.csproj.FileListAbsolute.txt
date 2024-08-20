@@ -1,3 +1,6 @@
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\DrivingService.deps.json
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\DrivingService.runtimeconfig.json
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\DrivingService.exe
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\appsettings.Development.json
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\appsettings.json
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\WebAPI.exe
@@ -562,7 +565,9 @@ D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\msco
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\msquic.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\aspnetcorev2_inprocess.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\Common.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\DrivingService.dll
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\Common.pdb
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\DrivingService.pdb
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\WebAPI.csproj.AssemblyReference.cache
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\WebAPI.GeneratedMSBuildEditorConfig.editorconfig
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\WebAPI.AssemblyInfoInputs.cache
@@ -585,8 +590,6 @@ D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\refi
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\WebAPI.pdb
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\WebAPI.genruntimeconfig.cache
 D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\obj\Debug\net8.0\win-x64\ref\WebAPI.dll
-D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\DrivingService.deps.json
-D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\DrivingService.runtimeconfig.json
-D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\DrivingService.exe
-D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\DrivingService.dll
-D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\DrivingService.pdb
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\Microsoft.AspNetCore.Http.Connections.Client.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\Microsoft.AspNetCore.SignalR.Client.dll
+D:\Faks\Cetvrta goina\WEB\Taxi\TaxiApp\Taxi\WebAPI\bin\Debug\net8.0\win-x64\Microsoft.AspNetCore.SignalR.Client.Core.dll

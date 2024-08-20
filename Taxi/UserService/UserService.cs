@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Common.Interfaces;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
-using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 
 namespace UserService
@@ -31,6 +30,11 @@ namespace UserService
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
             return this.CreateServiceRemotingReplicaListeners();
+        }
+
+        private IEnumerable<ServiceReplicaListener> CreateServiceRemotingReplicaListeners()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

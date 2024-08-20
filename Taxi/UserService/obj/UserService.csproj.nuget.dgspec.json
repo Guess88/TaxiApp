@@ -142,10 +142,6 @@
             "Microsoft.ServiceFabric.Services": {
               "target": "Package",
               "version": "[7.1.2175, )"
-            },
-            "Microsoft.ServiceFabric.Services.Remoting": {
-              "target": "Package",
-              "version": "[7.1.2175, )"
             }
           },
           "imports": [

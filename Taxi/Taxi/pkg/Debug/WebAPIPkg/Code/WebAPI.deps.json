@@ -10,6 +10,7 @@
       "WebAPI/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
+          "DrivingService": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.8",
           "Microsoft.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore.Design": "8.0.8",
@@ -3292,6 +3293,19 @@
             "fileVersion": "1.0.0.0"
           }
         }
+      },
+      "DrivingService/1.0.0": {
+        "dependencies": {
+          "Common": "1.0.0",
+          "Microsoft.ServiceFabric.Services": "7.1.2175",
+          "Microsoft.ServiceFabric.Services.Remoting": "7.1.2175"
+        },
+        "runtime": {
+          "DrivingService.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -4523,6 +4537,11 @@
       "hashPath": "system.windows.extensions.7.0.0.nupkg.sha512"
     },
     "Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DrivingService/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

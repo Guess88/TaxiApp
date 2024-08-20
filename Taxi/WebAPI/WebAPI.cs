@@ -65,6 +65,8 @@ namespace WebAPI
                             };
                         });
 
+   
+
                         builder.WebHost
                                     .UseKestrel()
                                     .UseContentRoot(Directory.GetCurrentDirectory())

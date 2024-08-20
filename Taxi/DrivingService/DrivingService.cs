@@ -21,6 +21,7 @@ namespace DrivingService
     public sealed class DrivingService : StatefulService, IDrive
     {
         private readonly TaxiDbContext _context;
+        private IReliableDictionary<int, Ride> _pendingRides;
         public DrivingService(StatefulServiceContext context)
             : base(context)
         {
@@ -29,6 +30,7 @@ namespace DrivingService
 
             _context = new TaxiDbContext(optionsBuilder.Options);
         }
+
 
         public async Task<Ride> CreateRide(int userId, string startAddress, string endAddress, decimal estimatedCost, TimeSpan estimatedWaitTime)
         {
@@ -43,11 +45,173 @@ namespace DrivingService
                 CreatedAt = DateTime.Now
             };
 
+            var user = await _context.Users.FindAsync(userId);
+            user.IsRideCreated = true;
+            _context.Users.Update(user);
+
             _context.Rides.Add(ride);
             await _context.SaveChangesAsync();
 
             return ride;
         }
+
+        public async Task<Ride> ConfirmRide(int rideId)
+        {
+            var ride = await _context.Rides.FindAsync(rideId);
+
+            if (ride == null || ride.Status != DrivingStatus.Created)
+            {
+                throw new InvalidOperationException("Ride not found or already confirmed.");
+            }
+
+            ride.Status = DrivingStatus.WaitingForAccept;
+
+            ride.EstimatedTravelTime = TimeSpan.FromMinutes(new Random().Next(10, 60)); 
+
+            await _context.SaveChangesAsync();
+
+            await AddRideToPendingList(ride);
+
+
+            return ride;
+        }
+
+
+
+        public async Task AddRideToPendingList(Ride ride)
+        {
+            using (var tx = this.StateManager.CreateTransaction())
+            {
+                _pendingRides = await this.StateManager.GetOrAddAsync<IReliableDictionary<int, Ride>>("pendingRides");
+
+                await _pendingRides.AddAsync(tx, ride.Id, ride);
+                await tx.CommitAsync();
+            }
+
+           
+        }
+
+        //Od strane vozaca
+        public async Task AcceptRide(int driverId, int rideId)
+        {
+
+            using (var tx = this.StateManager.CreateTransaction())
+            {
+               
+
+                var rideResult = await _pendingRides.TryGetValueAsync(tx, rideId);
+
+                if (rideResult.HasValue)
+                {
+                    var ride = rideResult.Value;
+                    ride.DriverId = driverId;
+                    ride.Status = DrivingStatus.InProgress;
+
+                    var driver = await _context.Users.FindAsync(driverId);
+                    var user = await _context.Users.FindAsync(ride.UserId);
+
+                    driver.IsRideAccepted = true;
+                    user.IsRideAccepted = true;
+
+                    _context.Rides.Update(ride);
+
+                    _context.Users.Update(driver);
+                    _context.Users.Update(user);
+
+                    await _context.SaveChangesAsync();
+
+                    //await NotifyUser(ride.UserId, ride.EstimatedTravelTime);
+
+                    await _pendingRides.TryRemoveAsync(tx, rideId);
+
+                    await tx.CommitAsync();
+
+
+                }
+            }
+        }
+
+
+        public async Task RateDriver(int driverId, int rating,int rideId,int userId)
+        {
+            if (rating < 1 || rating > 5)
+            {
+                throw new ArgumentException("Rating must be between 1 and 5.");
+            }
+
+            var driver = await _context.Users.FindAsync(driverId);
+            var user = await _context.Users.FindAsync(userId);
+
+            if (driver == null)
+            {
+                throw new InvalidOperationException("Driver not found.");
+            }
+
+            // Update the driver's rating
+            driver.RatingCount++;
+            driver.RatingTotal += rating;
+
+            user.IsRideCreated = false;
+
+            var ride = await _context.Rides.FindAsync(rideId);
+            ride.Status = DrivingStatus.Completed;
+
+
+            _context.Users.Update(driver);
+            _context.Users.Update(user);
+            _context.Rides.Update(ride);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<decimal> GetDriverAverageRating(int driverId)
+        {
+            var driver = await _context.Users.FindAsync(driverId);
+
+            if (driver == null)
+            {
+                throw new InvalidOperationException("Driver not found.");
+            }
+
+            if (driver.RatingCount == 0)
+            {
+                return 0; // No ratings yet
+            }
+
+            return (decimal)driver.RatingTotal / driver.RatingCount;
+        }
+
+        public async Task BlockDriver(int driverId)
+        {
+            var driver = await _context.Users.FindAsync(driverId);
+
+            if (driver == null)
+            {
+                throw new InvalidOperationException("Driver not found.");
+            }
+
+            driver.IsBlocked = true;
+            _context.Users.Update(driver);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UnblockDriver(int driverId)
+        {
+            var driver = await _context.Users.FindAsync(driverId);
+
+            if (driver == null)
+            {
+                throw new InvalidOperationException("Driver not found.");
+            }
+
+            driver.IsBlocked = false;
+            _context.Users.Update(driver);
+            await _context.SaveChangesAsync();
+        }
+
+
+
+
 
         /// <summary>
         /// Optional override to create listeners (e.g., HTTP, Service Remoting, WCF, etc.) for this service replica to handle client or user requests.

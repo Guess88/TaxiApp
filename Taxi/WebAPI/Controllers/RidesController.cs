@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
             _context = context;
     }
 
-        [HttpPost]
+        [HttpPost("createRide")]
         public async Task<IActionResult> CreateRide([FromBody] RideRequestDTO rideRequest)
         {
             try
@@ -54,5 +54,97 @@ namespace WebAPI.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+        [HttpPost("confirmRide")]
+        public async Task<IActionResult> ConfirmRide([FromBody] int rideId)
+        {
+            try
+            {
+                var proxy = ServiceProxy.Create<IDrive>(new Uri("fabric:/Taxi/DrivingService"), new ServicePartitionKey(0));
+                var ride = await proxy.ConfirmRide(rideId);
+
+                return Ok(ride);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPost("acceptRide")]
+        public async Task<IActionResult> AcceptRide(int rideId, [FromQuery] int driverId)
+        {
+            try
+            {
+                var proxy = ServiceProxy.Create<IDrive>(new Uri("fabric:/Taxi/DrivingService"), new ServicePartitionKey(0));
+                await proxy.AcceptRide(driverId, rideId);
+                return Ok("Ride accepted successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPost("rateDriver")]
+        public async Task<IActionResult> RateDriver([FromBody] RatingDTO ratingDTO)
+        {
+            try
+            {
+                var proxy = ServiceProxy.Create<IDrive>(new Uri("fabric:/Taxi/DrivingService"), new ServicePartitionKey(0));
+                await proxy.RateDriver(ratingDTO.DriverId, ratingDTO.Rating, ratingDTO.RideId, ratingDTO.UserId);
+                return Ok("Rating submitted successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("driver/{driverId}/rating")]
+        public async Task<IActionResult> GetDriverRating(int driverId)
+        {
+            try
+            {
+                var proxy = ServiceProxy.Create<IDrive>(new Uri("fabric:/Taxi/DrivingService"), new ServicePartitionKey(0));
+                var rating = await proxy.GetDriverAverageRating(driverId);
+                return Ok(rating);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPost("blockDriver")]
+        public async Task<IActionResult> BlockDriver(int driverId)
+        {
+            try
+            {
+                var proxy = ServiceProxy.Create<IDrive>(new Uri("fabric:/Taxi/DrivingService"), new ServicePartitionKey(0));
+                await proxy.BlockDriver(driverId);
+                return Ok("Driver blocked successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPost("unblockDriver")]
+        public async Task<IActionResult> UnblockDriver(int driverId)
+        {
+            try
+            {
+                var proxy = ServiceProxy.Create<IDrive>(new Uri("fabric:/Taxi/DrivingService"), new ServicePartitionKey(0));
+                await proxy.UnblockDriver(driverId);
+                return Ok("Driver unblocked successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
     }
 }
