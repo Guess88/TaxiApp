@@ -22,6 +22,9 @@ const DashboardAdmin = ({ user }) => {
     const [newPassword, setNewPassword] = useState('');
     const [repeatNewPassword, setRepeatNewPassword] = useState('');
     const [profilePicture, setProfilePicture] = useState(null);
+    const [rides, setRides] = useState([]);
+    const [drivers, setDrivers] = useState([]);
+    const [avgRating,setAvgRating] = useState({});
    
 
     useEffect(() => {
@@ -132,19 +135,130 @@ const DashboardAdmin = ({ user }) => {
         return `${day.toString().padStart(2, '0')}-${(month + 1).toString().padStart(2, '0')}-${year}`;
     }
 
+
+    const fetchDrivers = async () => {
+        try {
+            const response = await axios.get(process.env.REACT_APP_GET_USERS);
+            const filteredDrivers = response.data.filter(user => user.userType === 2)
+        
+            setDrivers(filteredDrivers);
+            filteredDrivers.forEach(driver => {
+                getDriverRating(driver.id);
+            });
+            
+        } catch (error) {
+            console.error('Error fetching all rides:', error);
+        }
+    };
+
     const handleVerification = async () => {
         try {
             setView('verification');
+            fetchDrivers();
         } catch (error) {
             console.error("Error verificationShow", error);
         }
     };
+
+    const fetchAllRides = async () => {
+        try {
+            const response = await axios.get(process.env.REACT_APP_ALL_RIDES);
+            setRides(response.data);
+        } catch (error) {
+            console.error('Error fetching all rides:', error);
+        }
+    };
+
+    const getDriverRating = async (driverId) => {
+        try {
+            const response = await axios.get(process.env.REACT_APP_AVG_RATING,{
+                params: { driverId: driverId }
+            });
+            const formattedRating = parseFloat(response.data).toFixed(2);
+            setAvgRating(prevRatings => ({
+                ...prevRatings,
+                [driverId]: formattedRating
+            }));
+            console.log(avgRating)
+
+
+        } catch (error) {
+            console.error('Error fetching all rides:', error);
+        }
+    };
+
+    const handleBlockButton = async (driverId) => {
+        try {
+            const response = await axios.post(process.env.REACT_APP_BLOCK_DRIVER,null,{
+                params: { driverId: driverId }
+            });
+            console.log(response.data);
+            fetchDrivers();
+        } catch (error) {
+            console.error('Error block driver:', error);
+        }
+    }
+
+    const handleUnblockButton = async (driverId) => {
+        try {
+            const response = await axios.post(process.env.REACT_APP_UNBLOCK_DRIVER,null,{
+                params: { driverId: driverId }
+            });
+            console.log(response.data);
+            fetchDrivers();
+        } catch (error) {
+            console.error('Error unblock driver:', error);
+        }
+    }
+
+    const handleAcceptButton = async (driverId) => {
+        try {
+            const response = await axios.post(process.env.REACT_APP_DRIVER_APPROVE,null,{
+                params: { driverId: driverId }
+            });
+            console.log(response.data);
+            fetchDrivers();
+        } catch (error) {
+            console.error('Error Accept driver:', error);
+        }
+    }
+
+    const handleRejectButton = async (driverId) => {
+        try {
+            const response = await axios.post(process.env.REACT_APP_DRIVER_REJECT,null,{
+                params: { driverId: driverId }
+            });
+            console.log(response.data);
+            fetchDrivers();
+        } catch (error) {
+            console.error('Error unblock driver:', error);
+        }
+    }
+    
+    
+
     const handleAllRides = async () => {
         try {
             setView('allRides');
+            fetchAllRides();
+                      
         } catch (error) {
             console.error("Error allRides", error);
         }
+    };
+
+    const statusMap = {
+        0: "Created",
+        1: "WaitingForAccept",
+        2: "InProgress",
+        3: "Completed",
+        4: "Cancelled"
+    };
+
+    const verificationStatus = {
+        0: "Pending",
+        1: "Approved",
+        2: "Rejected"
     };
 
     return (
@@ -291,9 +405,51 @@ const DashboardAdmin = ({ user }) => {
 
 
             ) : viewOption === "verification" ? (
-                <></>
+                <div className='customProfile-div ride-list' style={{ width: '35%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                    {drivers.map(driver => (
+                    <div key={driver.id} className="ride-item">
+                        
+                        <div className='ride-info'>
+                        <img src={`http://localhost:9062/api/Images/${driver.profilePicturePath}`} alt="User" style={{ width: '150px', height: '150px', borderRadius: '50%' ,marginLeft:'35%' }} />
+                            <h2>{driver.firstName} {driver.lastName}</h2>
+                            <h3>DriverID: {driver.id}</h3>
+                            <h3>Status: {verificationStatus[driver.verificationStatus]}</h3>
+                            {driver.verificationStatus === 0 ? (
+                                <>
+                                <button className='edit-button' style={{backgroundColor:'green'}} onClick={() => handleAcceptButton(driver.id)}>Accept</button>  
+                                <button className='edit-button' style={{backgroundColor:'red'}} onClick={() => handleRejectButton(driver.id)}>Reject</button> 
+                                </>
+                            ):(<></>)}
+                                
+                            <h3>Average rating: {avgRating[driver.id]}</h3>
+                        </div>
+                        {driver.isBlocked ? (
+                            <button className='edit-button' style={{backgroundColor:'green',marginLeft:'80%'}} onClick={() => handleUnblockButton(driver.id)}>Unblock</button>
+                        ): (
+                            <button className='edit-button' style={{backgroundColor:'red',marginLeft:'80%'}} onClick={() => handleBlockButton(driver.id)}>Block</button>
+                        )}
+                        
+                        <hr className="ride-separator"/>
+                    </div>
+            ))}
+                </div>
             ): viewOption === "allRides" ? (
-                <></>
+                <div className='customProfile-div ride-list' style={{ width: '35%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                {rides.map(ride => (
+                    <div key={ride.id} className="ride-item">
+                        <div className='ride-info'>
+                            <h3>Ride ID: {ride.id}</h3>
+                            <h3>DriverID: {ride.driverId}</h3>
+                            <h3>UserID: {ride.userId}</h3>
+                            <h3>Ride from {ride.startAddress} to {ride.endAddress}</h3>
+                            <h3>Date: {convertDateTimeToDateOnly(ride.createdAt)}</h3>
+                            <h3>Price: {ride.estimatedCost}$</h3>
+                            <h3>Status: {statusMap[ride.status]}</h3>
+                        </div>
+                        <hr className="ride-separator"/>
+                    </div>
+            ))}
+                </div>
             ) : null}
             </div>
         </div>

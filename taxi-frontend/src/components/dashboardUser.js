@@ -39,6 +39,7 @@ const DashboardUser = ({ user }) => {
     const [rideStatus, setRideStatus] = useState(0);
     const [valueRating, setValueRating] = useState(1);
     const [rides, setRides] = useState([]);
+    
 
    
 
@@ -62,9 +63,7 @@ const DashboardUser = ({ user }) => {
                 const response = await axios.get(process.env.REACT_APP_PREVIOUS_RIDES, {
                     params: { userId: userId }
                 });
-                console.log(userId);
                 setRides(response.data);
-                console.log(response.data);
             } catch (error) {
                 console.error("Error fetching rides:", error);
             }
@@ -72,7 +71,8 @@ const DashboardUser = ({ user }) => {
     
         fetchRides();
     }, [userId]);
-
+    
+    
    
 
     if (!user) {
@@ -227,13 +227,18 @@ const DashboardUser = ({ user }) => {
                 rideId: rideId,
                 userId: userId
             };
-            await axios.post(process.env.REACT_APP_RATE_DRIVER, data,{ //OVO 2 imeni sa driverId
+            await axios.post(process.env.REACT_APP_RATE_DRIVER, data,{ //OVO 2 imeni sa driverId///////////////////////////////////////////
                 headers: {
                     'Content-Type': 'application/json',
                     },
             });   
             setIsCreatedRide(false);
             setRideStatus(0);
+            
+            const responseRides = await axios.get(process.env.REACT_APP_PREVIOUS_RIDES, {
+                params: { userId: userId }
+            });
+            setRides(responseRides.data);
    
             alert('Thank you!');
         } catch (error) {
@@ -242,7 +247,7 @@ const DashboardUser = ({ user }) => {
         }
     };
 
-     const handleRideStatusChange = (newStatus) => {
+    const handleRideStatusChange = (newStatus) => {
         setRideStatus(newStatus);
     };
 
@@ -250,9 +255,9 @@ const DashboardUser = ({ user }) => {
     return (
         <div>
         {rideStatus === 2 ? (
-                            <div style={{ width: '20%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                            <div style={{ width: '30%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
                                 {/* Content for status 1 */}
-                                <p>Status is 1</p>
+                                <TimerComponent rideId={rideId} estimatedWaitTime={estimatedWaitTime} estimatedTravelTime={estimatedTravelTime} onRideStatusChange={handleRideStatusChange}/>
                             </div>
         ):(
             <div>
@@ -439,14 +444,10 @@ const DashboardUser = ({ user }) => {
                         ) : rideStatus === 1 ? (
                             <div style={{ width: '30%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
                                 <div className='customProfile-div'>
-                                    {/*<h2 style={{ marginLeft: '10%' }}>{startAddress}-{endAddress}</h2>
-                                    <h3>Wait until one of our employees accepts the ride</h3>    
-                                    {timeRemaining !== null ? (
-                                        <div>Vreme do dolaska: {timeRemaining} sekundi</div> 
-                                    ) : (
-                                        <div>Čekanje na prihvatanje vožnje...</div>
-                                    )}*/}
-                                   <TimerComponent rideId={rideId} estimatedWaitTime={estimatedWaitTime} estimatedTravelTime={estimatedTravelTime} onRideStatusChange={handleRideStatusChange}/>
+                                    <h2 style={{ marginLeft: '10%' }}>{startAddress}-{endAddress}</h2>
+                                    <h3>Wait until one of our employees accepts the ride</h3> 
+                                    {handleRideStatusChange(2)}  
+                                   
                                 </div>
                             </div>
                         ) : rideStatus === 3 ? (
@@ -466,9 +467,9 @@ const DashboardUser = ({ user }) => {
 
 
             ): viewOption === "previousRide" ? (
-                <div className='customProfile-div' style={{ width: '30%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                <div className='customProfile-div ride-list' style={{ width: '30%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
                     {rides.map(ride => (
-                        <div key={ride.id}>
+                        <div key={ride.id} className="ride-item">
                             <div className='ride-info'>
                                 <h3>Ride from {ride.startAddress} to {ride.endAddress}</h3>
                                 <h3>Date: {convertDateTimeToDateOnly(ride.createdAt)}</h3>

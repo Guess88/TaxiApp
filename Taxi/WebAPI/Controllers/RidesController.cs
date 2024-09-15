@@ -11,6 +11,7 @@ using Microsoft.ServiceFabric.Services.Client;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
 using System.Fabric;
 using Common.Interfaces;
+using DrivingService;
 
 namespace WebAPI.Controllers
 {
@@ -54,6 +55,8 @@ namespace WebAPI.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        
+
 
         [HttpPost("confirmRide")]
         public async Task<IActionResult> ConfirmRide([FromBody] int rideId)
@@ -71,8 +74,25 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet("getPendingRides")]
+        public async Task<IActionResult> GetPendingRides()
+        {
+            try
+            {
+                var cancellationToken = new CancellationToken();
+                var proxy = ServiceProxy.Create<IDrive>(new Uri("fabric:/Taxi/DrivingService"), new ServicePartitionKey(0));
+                var rides = await proxy.GetAllPendingRidesAsync(cancellationToken);
+                return Ok(rides);
+               
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         [HttpPost("acceptRide")]
-        public async Task<IActionResult> AcceptRide(int rideId, [FromQuery] int driverId)
+        public async Task<IActionResult> AcceptRide([FromQuery]int rideId,  [FromQuery]int driverId)
         {
             try
             {
@@ -122,8 +142,68 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("driver/{driverId}/rating")]
-        public async Task<IActionResult> GetDriverRating(int driverId)
+        [HttpGet("allRides")]
+        public async Task<IActionResult> GetAllRides()
+        {
+            try
+            {
+                var proxy = ServiceProxy.Create<IDrive>(new Uri("fabric:/Taxi/DrivingService"), new ServicePartitionKey(0));
+                var rides = await proxy.GetAllRides();
+
+                if (rides == null || rides.Count == 0)
+                {
+                    return NotFound("No previous rides found.");
+                }
+
+                return Ok(rides);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpPost("driversApprove")]
+        public async Task<IActionResult> ApproveDriver([FromQuery] int driverId)
+        {
+            try
+            {
+                var proxy = ServiceProxy.Create<IDrive>(new Uri("fabric:/Taxi/DrivingService"), new ServicePartitionKey(0));
+                var driver = await proxy.ApproveDriver(driverId);
+
+                if (driver == null)
+                {
+                    return NotFound();
+                }
+                return Ok(driver);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPost("driversReject")]
+        public async Task<IActionResult> RejectDriver([FromQuery] int driverId)
+        {          
+            try
+            {
+                var proxy = ServiceProxy.Create<IDrive>(new Uri("fabric:/Taxi/DrivingService"), new ServicePartitionKey(0));
+                var driver = await proxy.RejectDriver(driverId);
+          
+                if (driver == null)
+                {
+                    return NotFound();
+                }
+                return Ok(driver);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("driverRating")]
+        public async Task<IActionResult> GetDriverRating([FromQuery] int driverId)
         {
             try
             {
@@ -138,7 +218,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("blockDriver")]
-        public async Task<IActionResult> BlockDriver(int driverId)
+        public async Task<IActionResult> BlockDriver([FromQuery] int driverId)
         {
             try
             {
@@ -153,7 +233,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("unblockDriver")]
-        public async Task<IActionResult> UnblockDriver(int driverId)
+        public async Task<IActionResult> UnblockDriver([FromQuery] int driverId)
         {
             try
             {

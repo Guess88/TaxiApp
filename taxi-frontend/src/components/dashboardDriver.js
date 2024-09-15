@@ -3,6 +3,7 @@ import '../style/dashboardNav.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faMapMarkerAlt ,faRoad  ,faTaxi  } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import TimerComponent from './timerComponent';
 
 
 const DashboardDriver = ({ user }) => {
@@ -15,12 +16,17 @@ const DashboardDriver = ({ user }) => {
     const [lastName, setLastName] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [address, setAddress] = useState('');
+    const [verStatus, setVerStatus]=useState(0);
     
 
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [repeatNewPassword, setRepeatNewPassword] = useState('');
     const [profilePicture, setProfilePicture] = useState(null);
+    const [rides, setRides] = useState([]);
+    const [pendingRides, setPendingRides] = useState([]);
+    const [showTimer, setShowTimer] = useState(false);
+
    
 
     useEffect(() => {
@@ -31,6 +37,7 @@ const DashboardDriver = ({ user }) => {
             setLastName(user.lastName);
             setDateOfBirth(convertDateTimeToDateOnly(user.dateOfBirth));
             setAddress(user.address);
+            setVerStatus(user.verificationStatus)
         }
     }, [user]);
 
@@ -42,6 +49,7 @@ const DashboardDriver = ({ user }) => {
     const handleEditProfile = async () => {
         try {
             setView('editProfile');
+            console.log(user);
         } catch (error) {
             console.error("Error editProfile", error);
         }
@@ -117,7 +125,7 @@ const DashboardDriver = ({ user }) => {
           }
     };
 
-    
+  
 
     const convertDateTimeToDateOnly = (dateTime) => {
         const dateObj = new Date(dateTime);
@@ -131,23 +139,96 @@ const DashboardDriver = ({ user }) => {
         return `${day.toString().padStart(2, '0')}-${(month + 1).toString().padStart(2, '0')}-${year}`;
     }
 
+
+      
+
+    const fetchAllPendingRides = async() =>{
+        try {
+            const response = await axios.get(process.env.REACT_APP_PENDING_RIDES); 
+            setPendingRides(response.data);
+        } catch (error) {
+            console.error('Error fetching all rides:', error);
+        }
+    }
+
     const handleNewRides = async () => {
         try {
             setView('newRides');
+            fetchAllPendingRides();
         } catch (error) {
-            console.error("Error verificationShow", error);
+            console.error("Error newRides show", error);
         }
     };
+    
+    
+    const handleAcceptRideButton = async (rideId) => {
+        try {
+           const response = await axios.post(process.env.REACT_APP_ACCEPT_RIDE,null,{
+                params: { 
+                    rideId: rideId,
+                    driverId: user.id
+                 }
+           });
+           console.log(response.data);
+           fetchAllPendingRides();
+           setShowTimer(true);
+        } catch (error) {
+            console.error("Error acceptRideButton", error);
+        }
+    };
+
+    const fetchAllRides = async () => {
+        try {
+            const response = await axios.get(process.env.REACT_APP_ALL_RIDES);
+            const filteredRides = response.data.filter(ride => {
+                console.log("Ride driverId:", ride.driverId);
+                console.log("Ride status:", ride.status);
+                console.log("User ID:", user.id);
+                return ride.driverId === user.id && ride.status === 3;
+            });
+            
+            console.log("Filtered Rides:", filteredRides);
+            setRides(filteredRides);
+        } catch (error) {
+            console.error('Error fetching all rides:', error);
+        }
+    };
+
     const handleMyRides = async () => {
         try {
             setView('myRides');
+            fetchAllRides();
         } catch (error) {
             console.error("Error allRides", error);
         }
     };
+
+    const parseTimeSpanToMilliseconds = (timeSpan) => {
+        const [hours, minutes, seconds] = timeSpan.split(':').map(Number);
+        return ((hours * 60 * 60) + (minutes * 60) + seconds) * 1000;
+      };
+
+      const formatTime = (time) => {
+        const minutes = Math.floor(time / 60000);
+        const seconds = Math.floor((time % 60000) / 1000);
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      };
+
+      const handleRideStatusChange = (newStatus) => {
+        console.log(newStatus);
+     };
+
+    
+
     return (
         <div>
-        <div id="nav-bar">
+       {verStatus === 0 ? (
+             <div  style={{ width: '25%', backgroundColor: '#18283b',position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',padding: '20px',boxSizing: 'border-box',borderRadius: '10px'}}>
+               <h1>Waiting for verification</h1>
+            </div>
+        ) : verStatus === 1 ? (
+            <div>
+                <div id="nav-bar">
             <input id="nav-toggle" type="checkbox"/>
             <div id="nav-header"><a id="nav-title" href="/" target="_blank"rel="noreferrer noopener"><FontAwesomeIcon icon={faTaxi} className="fas" />Taxi</a>
                 <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
@@ -288,12 +369,64 @@ const DashboardDriver = ({ user }) => {
 
 
             ) : viewOption === "newRides" ? (
-                <></>
+                <div className='customProfile-div ride-list' style={{ width: '35%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                    {pendingRides.length > 0 ? (
+                        pendingRides.map(ride => (
+                            <div key={ride.id} className="ride-item">
+                                <div className='ride-info'>
+                                    <h3>Ride from {ride.startAddress} to {ride.endAddress}</h3>
+                                    <h3>Price: {ride.estimatedCost}$</h3>
+                                    <h3>Time to get to the customer: {formatTime(parseTimeSpanToMilliseconds(ride.estimatedWaitTime))} minutes.</h3>
+                                    {user.isBlocked ? (
+                                        <button className='edit-button' style={{backgroundColor:'gray', marginLeft:'80%'}} disabled>Blocked</button>
+                                    ) : (
+                                        <button className='edit-button' style={{backgroundColor:'green', marginLeft:'80%'}} onClick={() => handleAcceptRideButton(ride.id)}>Accept</button>
+                                    )}
+                                    {showTimer && (
+                                         <div style={{ width: '30%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                                         {/* Content for status 1 */}
+                                        
+                                        <TimerComponent rideId={ride.id} estimatedWaitTime={ride.estimatedWaitTime} estimatedTravelTime={ride.estimatedTravelTime} onRideStatusChange={handleRideStatusChange}/></div>
+                                    )}
+                                </div>
+                                <hr className="ride-separator"/>
+                            </div>
+                        ))
+                    ) : (
+                        <h2 style={{marginLeft:'150px'}}>No pending rides available.</h2>
+                    )}
+                </div>
+
+
             ): viewOption === "myRides" ? (
-                <></>
+                <div className='customProfile-div ride-list' style={{ width: '35%', backgroundColor: '#18283b', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '20px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                    {rides.length > 0 ? (
+                        rides.map(ride => (
+                            <div key={ride.id} className="ride-item">
+                                <div className='ride-info'>
+                                    <h3>Ride from {ride.startAddress} to {ride.endAddress}</h3>
+                                    <h3>Date: {convertDateTimeToDateOnly(ride.createdAt)}</h3>
+                                    <h3>Price: {ride.estimatedCost}$</h3>
+                                </div>
+                                <hr className="ride-separator"/>
+                            </div>
+                        ))
+                    ) : (
+                        <h2 style={{marginLeft:'180px'}}>No rides available.</h2>
+                    )}
+                </div>
             ) : null}
             </div>
         </div>
+            </div>
+        ) : verStatus === 2 ? (
+            <div  style={{ width: '25%', backgroundColor: '#18283b',position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',padding: '20px',boxSizing: 'border-box',borderRadius: '10px'}}>
+               <h1>You are rejected!</h1>
+            </div>
+        ) : (
+            <></>
+        )}
+        
      </div>
     );
 };

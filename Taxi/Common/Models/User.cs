@@ -14,6 +14,13 @@ namespace Common.Models
         Driver
     }
 
+    public enum DriverVerificationStatus
+    {
+        Pending,
+        Approved,
+        Rejected
+    }
+
     [Table("User")]
     public class User
     {
@@ -36,5 +43,6 @@ namespace Common.Models
         public bool IsRideAccepted { get; set; } = false;
         public int RatingCount { get; set; }
         public int RatingTotal { get; set; }
+        public DriverVerificationStatus VerificationStatus { get; set; }
     }
 }

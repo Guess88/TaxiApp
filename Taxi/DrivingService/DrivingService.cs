@@ -93,6 +93,29 @@ namespace DrivingService
            
         }
 
+        public async Task<IEnumerable<Ride>> GetAllPendingRidesAsync(CancellationToken cancellationToken)
+        {
+            var rides = new List<Ride>();
+
+            using (var tx = this.StateManager.CreateTransaction())
+            {
+                // Uzimamo sve stavke iz _pendingRides
+                var enumerable = await _pendingRides.CreateEnumerableAsync(tx);
+
+                // Iteriramo kroz sve stavke
+                using (var enumerator = enumerable.GetAsyncEnumerator())
+                {
+                    while (await enumerator.MoveNextAsync(cancellationToken))
+                    {
+                        rides.Add(enumerator.Current.Value);
+                    }
+                }
+            }
+
+            return rides;
+        }
+
+
         //Od strane vozaca
         public async Task AcceptRide(int driverId, int rideId)
         {
@@ -154,6 +177,8 @@ namespace DrivingService
             driver.RatingTotal += rating;
 
             user.IsRideCreated = false;
+            user.IsRideAccepted = false;
+            driver.IsRideAccepted = false;
 
             var ride = await _context.Rides.FindAsync(rideId);
             ride.Status = DrivingStatus.Completed;
@@ -177,6 +202,37 @@ namespace DrivingService
                 .OrderByDescending(r => r.CreatedAt) 
                 .ToListAsync();
         }
+
+        public async Task<List<Ride>> GetAllRides()
+        {
+            return await _context.Rides.AsNoTracking().ToListAsync();
+        }
+
+
+        public async Task<User> ApproveDriver(int driverId)
+        {
+            var driver = await _context.Users.FindAsync(driverId);
+            if (driver != null)
+            {
+                driver.VerificationStatus = DriverVerificationStatus.Approved;
+                await _context.SaveChangesAsync();
+                // Slanje email notifikacije
+            }
+            return driver;
+        }
+
+        public async Task<User> RejectDriver(int driverId)
+        {
+            var driver = await _context.Users.FindAsync(driverId);
+            if (driver != null)
+            {
+                driver.VerificationStatus = DriverVerificationStatus.Rejected;
+                await _context.SaveChangesAsync();
+                // Slanje email notifikacije
+            }
+            return driver;
+        }
+
 
         public async Task<decimal> GetDriverAverageRating(int driverId)
         {

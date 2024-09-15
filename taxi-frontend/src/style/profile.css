@@ -104,7 +104,40 @@
     box-shadow: 0 0 5px rgba(31, 120, 180, 0.5);
 }
 
+.ride-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Razmak između stavki */
+    max-height: 95vh; /* Maksimalna visina liste */
+    overflow-y: auto;
+}
+
+.ride-list::-webkit-scrollbar {
+    display: none;
+}
+
+.ride-item {
+    border: 1px solid #ccc; /* Siva ivica oko svakog elementa */
+    border-radius: 8px; /* Zaobljeni uglovi */
+    padding: 15px; /* Unutrašnji razmak */
+   /* Svetlo siva pozadina */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Svi efekat senčenja */
+    margin-bottom: 10px;
+}
+
 .ride-info {
     display: flex;
-    gap: 30px; /* Razmak između elemenata */
+    flex-direction: column;
+    gap: 10px; /* Razmak između informacija */
+}
+
+.ride-info h3 {
+    margin: 0; /* Uklanja podrazumevani margin */
+    font-size: 1.1em; /* Povećava veličinu fonta za naslove */
+}
+
+.ride-separator {
+    border: none; /* Uklanja ivice */
+    border-top: 1px solid #ddd; /* Svetla siva linija kao separator */
+    margin: 10px 0; /* Razmak iznad i ispod separatora */
 }
